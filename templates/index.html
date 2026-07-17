@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberSafe India — Awareness. Protection. Justice.</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Rajdhani:wght@400;500;600;700&family=Exo+2:ital,wght@0,300;0,400;0,600;0,800;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</head>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<body>
+    <!-- AI ASSISTANT -->
+    <div class="ai-btn" onclick="toggleAIChat()">🤖</div>
+    <div class="ai-chat" id="aiChat">
+        <div class="ai-header">CyberSafe AI Assistant</div>
+        <div class="ai-messages" id="aiMessages">
+            <div class="ai-message bot">
+                Hello. I am CyberSafe AI.
+                Ask me about scams, phishing, UPI fraud, or cyber safety.
+            </div>
+        </div>
+        <div class="ai-input-area">
+            <input type="text" id="aiInput" placeholder="Ask about cyber threats...">
+            <button onclick="sendAIMessage()">Send</button>
+        </div>
+    </div>
+
+    <!-- TOPBAR -->
+    <nav class="topbar">
+        <div class="topbar-inner">
+            <div class="logo">
+                <div class="logo-icon">CS</div>CyberSafe India
+            </div>
+            <div class="nav-links">
+                <a href="#blog">Blog</a>
+                <a href="#live-news">Live News</a>
+                <a href="#helpline">Helpline</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- TICKER -->
+    <div class="ticker-wrap">
+        <div class="ticker-inner" id="ticker"></div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-tag">🛡 India's #1 Cyber Crime Awareness Platform</div>
+        <h1>Cyber<span>Safe</span> India</h1>
+        <p>Real-time alerts, expert guides, and live updates on cyber threats targeting India. Stay one step ahead of
+            digital criminals.</p>
+        <div class="hero-stats" id="stats-row">
+            <div class="live-counter">
+                <div class="counter-box">
+                    <h2 id="attackCounter">0</h2>
+                    <p>Cyber Threats Detected Today</p>
+                </div>
+                <canvas id="matrixCanvas"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIVE THREAT INTELLIGENCE -->
+    <section class="threat-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Live Threat Intelligence <span class="live-indicator">● LIVE</span></h2>
+            </div>
+            <!-- IOC SEARCH -->
+
+            <div class="ioc-search-box">
+
+                <input type="text" id="iocInput" placeholder="Search suspicious domain or URL...">
+
+                <button onclick="searchIOC()">
+
+                    Analyze IOC
+
+                </button>
+
+
+            </div>
+
+            <!-- LIVE ATTACK STREAM -->
+
+            <section class="attack-stream-section">
+
+                <div class="section-header">
+
+                    <h2>
+
+                        Live Cyber Attack Stream
+
+                        <span class="live-indicator">
+
+                            ● ACTIVE
+
+                        </span>
+
+                    </h2>
+
+                </div>
+
+                <div id="attackStream">
+
+                </div>
+            </section>
+            <div id="iocResult"></div>
+            <div id="threatFeed">
+                <div class="live-loading">Loading real threat intelligence...</div>
+            </div>
+
+        </div>
+
+        <!-- INDIA THREAT MAP -->
+
+        <section class="threat-map-section">
+
+            <div class="section-header">
+
+                <h2>
+
+                    India Cyber Threat Map
+
+                    <span class="live-indicator">
+
+                        ● LIVE
+
+                    </span>
+
+                </h2>
+
+            </div>
+
+            <div id="indiaThreatMap"></div>
+
+        </section>
+    </section>
+
+    <!-- BLOG SECTION -->
+    <section class="blog-section" id="blog">
+        <div class="container">
+            <div class="section-header">
+                <h2>Latest Posts</h2>
+                <div class="sh-line"></div><span class="sh-badge" id="post-count">0 Posts</span>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="🔍 Search posts…" oninput="renderBlog()">
+                <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+                <button class="filter-btn" onclick="setFilter('alert',this)">🚨 Alerts</button>
+                <button class="filter-btn" onclick="setFilter('guide',this)">📖 Guides</button>
+                <button class="filter-btn" onclick="setFilter('news',this)">📰 News</button>
+            </div>
+            <div id="blog-output"></div>
+            <div class="helpline-banner" id="helpline">
+                <div>
+                    <div class="hl-text">🚨 Cyber Crime Helpline — Report within the Golden Hour</div>
+                    <div class="hl-note">Available 24×7 · Report fraud, phishing, and scams</div>
+                </div>
+                <div class="hl-num">📞 1930</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIVE NEWS SECTION -->
+    <section class="live-section" id="live-news">
+        <div class="container">
+            <div class="section-header">
+                <h2>Live Cyber News</h2>
+                <div class="sh-line"></div><span class="sh-badge"
+                    style="background:var(--gold);color:#000;animation:pulse-tag 1.5s ease-in-out infinite">●
+                    LIVE</span>
+            </div>
+            <div class="live-grid" id="live-grid">
+                <div class="live-loading"><span class="spinner"></span> Fetching latest cyber news…</div>
+            </div>
+            <div style="text-align:center;margin-top:20px"><button class="filter-btn" onclick="fetchLiveNews()"
+                    style="padding:10px 24px;">↻ Refresh News</button></div>
+        </div>
+    </section>
+
+    <footer>
+        <div>© 2026 CyberSafe India · Built for awareness · <a href="https://cybercrime.gov.in"
+                target="_blank">cybercrime.gov.in</a></div>
+        <div style="margin-top:6px;color:var(--accent)">National Cyber Crime Helpline: 1930</div>
+    </footer>
+
+    <!-- ADMIN PANEL MODAL -->
+    <div class="overlay" id="admin-overlay">
+        <div class="admin-panel">
+            <div class="admin-header">
+                <h2>⚙ Admin — Manage Posts</h2><button class="close-btn" onclick="closeAdmin()">✕</button>
+            </div>
+            <div class="admin-body">
+                <div class="form-row">
+                    <div class="form-group"><label>Post Title *</label><input type="text" id="f-title"
+                            placeholder="e.g. New UPI Scam Alert"></div>
+                    <div class="form-group"><label>Category *</label><select id="f-cat">
+                            <option value="alert">🚨 Alert</option>
+                            <option value="guide">📖 Guide</option>
+                            <option value="news">📰 News</option>
+                        </select></div>
+                </div>
+                <div class="form-group"><label>Summary (short description) *</label><input type="text" id="f-summary"
+                        placeholder="Brief one-line description"></div>
+                <div class="form-group"><label>Full Content *</label><textarea id="f-content"
+                        placeholder="Detailed post content…"></textarea></div>
+                <div class="form-row">
+                    <div class="form-group"><label>Author</label><input type="text" id="f-author"
+                            placeholder="e.g. CyberSafe Team" value="CyberSafe Team"></div>
+                    <div class="form-group"><label>Emoji Icon</label><input type="text" id="f-emoji"
+                            placeholder="e.g. 🛡 or 🚨" value="🛡"></div>
+                </div>
+                <div class="form-group"><label>Featured Post?</label><select id="f-featured">
+                        <option value="false">No</option>
+                        <option value="true">Yes — show as hero card</option>
+                    </select></div>
+                <button class="submit-btn" onclick="addPost()">+ Publish Post</button>
+                <div class="post-list">
+                    <div class="post-list-title">Existing Posts</div>
+                    <div id="admin-post-list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="toast" id="toast"></div>
+</body>
+
+</html>

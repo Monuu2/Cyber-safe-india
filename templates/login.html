@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberSafe Login</title>
+    <style>
+        body {
+            background: #050c14;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial;
+        }
+        .login-box {
+            width: 350px;
+            background: #08131f;
+            border: 1px solid #163046;
+            padding: 40px;
+            border-radius: 12px;
+        }
+        h1 {
+            color: #00e5ff;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 20px;
+            background: #0d1b28;
+            border: 1px solid #183246;
+            color: white;
+            border-radius: 8px;
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #00e5ff;
+            border: none;
+            color: black;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .error {
+            color: #ff3d5a;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h1>CyberSafe Admin</h1>
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+        <form method="POST">
+            <input type="password" name="password" placeholder="Enter Password">
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>

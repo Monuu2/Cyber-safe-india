@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title> CyberSafe Intelligence Dashboard </title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+
+            background: #050c14;
+            color: white;
+
+            font-family: Arial;
+
+            display: flex;
+
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+
+            width: 260px;
+
+            background: #08131f;
+
+            border-right: 1px solid #102235;
+
+            padding: 30px 20px;
+        }
+
+        .logo {
+
+            font-size: 24px;
+
+            font-weight: bold;
+
+            color: #00e5ff;
+
+            margin-bottom: 40px;
+        }
+
+        .menu {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 15px;
+        }
+
+        .menu button {
+
+            background: #0d1b28;
+
+            border: 1px solid #183246;
+
+            color: white;
+
+            padding: 14px;
+
+            border-radius: 8px;
+
+            text-align: left;
+
+            cursor: pointer;
+
+            transition: 0.2 s;
+        }
+
+        .menu button: hover {
+
+            border-color: #00e5ff;
+
+            transform: translateX(4px);
+        }
+
+        /* MAIN */
+
+        .main {
+
+            flex: 1;
+
+            padding: 40px;
+        }
+
+        .header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+
+            color: #00e5ff;
+        }
+
+        .stats {
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1 fr);
+
+            gap: 20px;
+
+            margin-bottom: 40px;
+        }
+
+        .card {
+
+            background: #08131f;
+
+            border: 1px solid #13283d;
+
+            padding: 25px;
+
+            border-radius: 12px;
+        }
+
+        .card h2 {
+
+            color: #00e5ff;
+
+            font-size: 32px;
+
+            margin-bottom: 10px;
+        }
+
+        .card p {
+
+            color: #8ea5b8;
+        }
+
+        /* FORM */
+
+        .form-box {
+
+            background: #08131f;
+
+            border: 1px solid #13283d;
+
+            border-radius: 12px;
+
+            padding: 30px;
+        }
+
+        .form-box h2 {
+
+            margin-bottom: 20px;
+
+            color: #00e5ff;
+        }
+
+        input,
+        textarea,
+        select {
+
+            width: 100%;
+
+            margin-bottom: 20px;
+
+            background: #0d1b28;
+
+            border: 1px solid #183246;
+
+            color: white;
+
+            padding: 14px;
+
+            border-radius: 8px;
+
+            outline: none;
+        }
+
+        textarea {
+
+            min-height: 140px;
+
+            resize: vertical;
+        }
+
+        .publish-btn {
+
+            background: #00e5ff;
+
+            color: black;
+
+            border: none;
+
+            padding: 14px 26px;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .publish-btn: hover {
+
+            opacity: 0.85;
+        }
+
+        #result {
+
+            margin-top: 20px;
+
+            color: #7fff6e;
+        }
+
+        table {
+
+            border-collapse: collapse;
+
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+
+            padding: 14px;
+
+            border-bottom: 1px solid #183246;
+        }
+
+        th {
+
+            color: #00e5ff;
+        }
+
+        .delete-btn {
+
+            background: #ff3d5a;
+
+            color: white;
+
+            border: none;
+
+            padding: 8px 14px;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"> </script>
+
+<body>
+
+    <!--SIDEBAR-->
+
+    <div class="sidebar">
+
+        <div class="logo">
+            CyberSafe </div>
+
+        <div class="menu">
+
+            <button> 📡Threat Feed </button>
+
+            <button> 🚨Alerts </button>
+
+            <button> 📰News Reports </button>
+
+            <button> 🛡Incident Center </button>
+
+            <button> ⚙Settings </button>
+
+        </div>
+
+    </div>
+
+    <!--MAIN-->
+
+    <div class="main">
+
+        <div class="header">
+
+            <h1> Cyber Intelligence Dashboard </h1>
+
+        </div>
+
+        <!--STATS-->
+
+        <div class="stats">
+
+            <div class="card">
+
+                <h2> 128 </h2>
+
+                <p> Threat Reports </p>
+
+            </div>
+
+            <div class="card">
+
+                <h2> 43 </h2>
+
+                <p> Critical Alerts </p>
+
+            </div>
+
+            <div class="card">
+
+                <h2> 12 </h2>
+
+                <p> Active Investigations </p>
+
+            </div>
+
+        </div> <!--ANALYTICS-->
+
+        <div class="form-box" style="margin-bottom:30px;">
+
+            <h2> Threat Analytics </h2>
+
+            <canvas id="threatChart"> </canvas>
+
+        </div>
+
+        <!--AI SCAM DETECTOR-->
+
+        <div class="form-box" style="margin-bottom:30px;">
+
+            <h2> AI Scam Detector </h2>
+
+            <textarea id="scamInput" placeholder="Paste suspicious message, URL, email, or scam text..."> </textarea>
+
+            <button class="publish-btn" onclick="analyzeScam()">
+
+                Analyze Threat
+
+            </button>
+
+            <div id="scamResult" style="margin-top:20px;"> </div>
+
+        </div>
+
+        <!--FORM-->
+
+        <div class="form-box">
+
+            <h2> Publish Threat Intelligence </h2>
+
+            <input type="text" id="title" placeholder="Threat Title">
+
+            <textarea id="summary" placeholder="Threat Summary"> </textarea>
+
+            <input type="text" id="source" placeholder="Threat Source">
+
+            <select id="category">
+
+                <option value="alert"> Alert </option>
+
+                <option value="news"> News </option>
+
+                <option value="guide"> Guide </option>
+
+            </select>
+
+            <button class="publish-btn" onclick="publishNews()">
+                Publish Threat Report </button>
+
+            <div id="result"> </div>
+
+        </div>
+
+    </div>
+
+    <!--THREAT TABLE-->
+
+    <div class="form-box" style="margin-top:30px;">
+
+        <h2> Live Threat Feed </h2>
+
+        <table width="100%" id="newsTable">
+
+            <thead>
+
+                <tr>
+
+                    <th align="left"> Title </th>
+
+                    <th align="left"> Category </th>
+
+                    <th align="left"> Source </th>
+
+                    <th align="left"> Action </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <script>
+
+        async function publishNews() {
+
+            const title = document.getElementById('title').value;
+
+            const summary = document.getElementById('summary').value;
+
+            const source = document.getElementById('source').value;
+
+            const category = document.getElementById('category').value;
+
+            const response = await fetch('/api/news', {
+
+                method: 'POST',
+
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+
+                body: JSON.stringify({
+                    title,
+                    summary,
+                    source,
+                    category
+                })
+            });
+
+            const result = await response.json();
+
+            document.getElementById('result').innerText =
+                result.message;
+        }
+
+        async function loadNews() {
+
+            const response = await fetch('/api/news');
+
+            const news = await response.json();
+
+            renderThreatChart(news);
+
+            const tbody = document.querySelector('#newsTable tbody');
+
+            tbody.innerHTML = '';
+
+            news.forEach(item => {
+
+                tbody.innerHTML += `
+
+            <tr>
+
+                <td>${item.title}</td>
+
+                <td>${item.category}</td>
+
+                <td>${item.source}</td>
+
+                <td>
+
+                    <button
+                        class="delete-btn"
+                        onclick="deleteNews(${item.id})">
+
+                        Delete
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+        `;
+            });
+        }
+
+
+        async function deleteNews(id) {
+
+            const response = await fetch(`/api/news/${id}`, {
+
+                method: 'DELETE'
+
+            });
+
+            const result = await response.json();
+
+            alert(result.message);
+
+            loadNews();
+
+            setInterval(() => {
+
+                loadNews();
+
+            }, 5000);
+        }
+
+        loadNews();
+
+        let threatChart;
+
+        function renderThreatChart(news) {
+
+            let alerts = 0;
+            let guides = 0;
+            let reports = 0;
+
+            news.forEach(item => {
+
+                if (item.category === 'alert') {
+                    alerts++;
+                } else if (item.category === 'guide') {
+                    guides++;
+                } else {
+                    reports++;
+                }
+            });
+
+            const ctx =
+                document.getElementById('threatChart');
+
+            if (threatChart) {
+                threatChart.destroy();
+            }
+
+            threatChart = new Chart(ctx, {
+
+                type: 'bar',
+
+                data: {
+
+                    labels: [
+                        'Alerts',
+                        'Guides',
+                        'News'
+                    ],
+
+                    datasets: [{
+
+                        label: 'Threat Intelligence',
+
+                        data: [
+                            alerts,
+                            guides,
+                            reports
+                        ],
+
+                        borderWidth: 1
+                    }]
+                },
+
+                options: {
+                    responsive: true
+                }
+            });
+        }
+
+        function analyzeScam() {
+
+            const input =
+                document.getElementById('scamInput')
+                    .value
+                    .toLowerCase();
+
+            const result =
+                document.getElementById('scamResult');
+
+            const suspiciousWords = [
+
+                'otp',
+                'urgent',
+                'bank',
+                'verify',
+                'upi',
+                'reward',
+                'lottery',
+                'click link',
+                'password',
+                'investment',
+                'crypto',
+                'kyc',
+                'suspended',
+                'refund'
+
+            ];
+
+            let score = 0;
+
+            suspiciousWords.forEach(word => {
+
+                if (input.includes(word)) {
+                    score++;
+                }
+            });
+
+            if (score >= 5) {
+
+                result.innerHTML = `
+
+            <div style="
+                background:#ff3d5a22;
+                border:1px solid #ff3d5a;
+                padding:20px;
+                border-radius:10px;
+                color:#ff3d5a;
+            ">
+
+                HIGH RISK SCAM DETECTED
+
+            </div>
+
+        `;
+            } else if (score >= 3) {
+
+                result.innerHTML = `
+
+            <div style="
+                background:#ffd00022;
+                border:1px solid #ffd000;
+                padding:20px;
+                border-radius:10px;
+                color:#ffd000;
+            ">
+
+                SUSPICIOUS CONTENT DETECTED
+
+            </div>
+
+        `;
+            } else {
+
+                result.innerHTML = `
+
+            <div style="
+                background:#00ff8822;
+                border:1px solid #00ff88;
+                padding:20px;
+                border-radius:10px;
+                color:#00ff88;
+            ">
+
+                LOW THREAT LEVEL
+
+            </div>
+
+        `;
+            }
+        }
+    </script>
+
+</body>
+
+</html>
