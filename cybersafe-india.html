@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CyberSafe India — Awareness. Protection. Justice.</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Rajdhani:wght@400;500;600;700&family=Exo+2:ital,wght@0,300;0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050c14;
+    --bg2: #080f1a;
+    --bg3: #0d1a28;
+    --panel: #0a1520;
+    --border: #1a3050;
+    --accent: #00e5ff;
+    --accent2: #ff3d5a;
+    --accent3: #7fff6e;
+    --text: #c8dff0;
+    --text-dim: #5a7a99;
+    --text-bright: #eef6ff;
+    --gold: #ffd166;
+    --card-bg: #0b1825;
+    --grid: rgba(0,229,255,0.03);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Exo 2', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  body::before {
+    content:'';
+    position:fixed; inset:0;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 39px, var(--grid) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, var(--grid) 40px);
+    pointer-events:none; z-index:0;
+  }
+
+  /* TOPBAR */
+  .topbar {
+    background: rgba(5,12,20,0.95);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 0;
+    position: sticky; top:0; z-index:100;
+    backdrop-filter: blur(12px);
+  }
+  .topbar-inner {
+    max-width:1200px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 20px;
+  }
+  .logo {
+    font-family:'Rajdhani',sans-serif;
+    font-size:1.4rem; font-weight:700;
+    color:var(--accent); letter-spacing:2px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .logo-icon {
+    width:28px; height:28px;
+    background: linear-gradient(135deg,var(--accent),var(--accent2));
+    clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+    display:grid; place-items:center;
+    font-size:.75rem; font-weight:700; color:#000;
+  }
+  .nav-links { display:flex; gap:20px; }
+  .nav-links a {
+    color:var(--text-dim); text-decoration:none;
+    font-family:'Rajdhani',sans-serif; font-weight:600;
+    font-size:.85rem; letter-spacing:1px; text-transform:uppercase;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color:var(--accent); }
+  .admin-btn {
+    background: transparent;
+    border: 1px solid var(--accent2);
+    color: var(--accent2);
+    padding: 5px 14px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family:'Rajdhani',sans-serif;
+    font-weight:700; font-size:.8rem;
+    letter-spacing:1px; text-transform:uppercase;
+    transition: all .2s;
+  }
+  .admin-btn:hover { background:var(--accent2); color:#fff; }
+
+  /* TICKER */
+  .ticker-wrap {
+    background: linear-gradient(90deg, var(--accent2) 0%, #b5001f 100%);
+    overflow: hidden; padding: 6px 0;
+    position: relative; z-index:1;
+  }
+  .ticker-inner {
+    display:flex; white-space:nowrap;
+    animation: ticker-scroll 40s linear infinite;
+  }
+  .ticker-inner:hover { animation-play-state: paused; }
+  .ticker-item {
+    display:inline-flex; align-items:center; gap:8px;
+    padding: 0 30px;
+    font-family:'Space Mono',monospace; font-size:.72rem;
+    color:#fff; font-weight:700; letter-spacing:.5px;
+  }
+  .ticker-dot { width:5px; height:5px; background:#fff; border-radius:50%; opacity:.6; }
+  @keyframes ticker-scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+  /* HERO */
+  .hero {
+    position:relative; padding: 70px 20px 60px;
+    text-align:center; overflow:hidden; z-index:1;
+  }
+  .hero::before {
+    content:'';
+    position:absolute; top:-60px; left:50%; transform:translateX(-50%);
+    width:700px; height:700px;
+    background: radial-gradient(ellipse, rgba(0,229,255,0.06) 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .hero-tag {
+    display:inline-block;
+    background: rgba(0,229,255,.1);
+    border: 1px solid var(--accent);
+    color:var(--accent);
+    font-family:'Space Mono',monospace; font-size:.65rem;
+    padding:4px 12px; letter-spacing:2px; text-transform:uppercase;
+    margin-bottom:20px; border-radius:2px;
+  }
+  .hero h1 {
+    font-family:'Rajdhani',sans-serif;
+    font-size: clamp(2.5rem,6vw,4.5rem);
+    font-weight:700; line-height:1.1;
+    color:var(--text-bright);
+    text-transform:uppercase; letter-spacing:2px;
+  }
+  .hero h1 span { color:var(--accent); }
+  .hero p {
+    max-width:560px; margin: 18px auto 30px;
+    color:var(--text-dim); font-size:1rem; line-height:1.7;
+  }
+  .hero-stats {
+    display:flex; justify-content:center; gap:40px;
+    flex-wrap:wrap; margin-top:20px;
+  }
+  .stat-box {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--accent);
+    padding: 16px 28px; border-radius:4px;
+    text-align:center; min-width:130px;
+  }
+  .stat-val {
+    font-family:'Rajdhani',sans-serif;
+    font-size:2rem; font-weight:700; color:var(--accent);
+    line-height:1;
+  }
+  .stat-val.red { color:var(--accent2); }
+  .stat-val.green { color:var(--accent3); }
+  .stat-label {
+    font-size:.68rem; text-transform:uppercase;
+    letter-spacing:1px; color:var(--text-dim); margin-top:4px;
+    font-family:'Space Mono',monospace;
+  }
+
+  /* MAIN LAYOUT */
+  .container { max-width:1200px; margin:0 auto; padding: 0 20px; position:relative; z-index:1; }
+
+  /* SECTION HEADER */
+  .section-header {
+    display:flex; align-items:center; gap:12px;
+    margin-bottom:28px; padding-bottom:12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-header h2 {
+    font-family:'Rajdhani',sans-serif;
+    font-size:1.4rem; font-weight:700; text-transform:uppercase;
+    letter-spacing:2px; color:var(--text-bright);
+  }
+  .sh-line { flex:1; height:1px; background: linear-gradient(90deg, var(--border), transparent); }
+  .sh-badge {
+    background:var(--accent); color:#000;
+    font-family:'Space Mono',monospace; font-size:.6rem;
+    padding:3px 8px; font-weight:700; letter-spacing:1px;
+  }
+
+  /* BLOG GRID */
+  .blog-section { padding: 50px 0; }
+  .featured-grid {
+    display:grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 20px; margin-bottom:20px;
+  }
+  .card-grid {
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:18px;
+  }
+  @media(max-width:900px) {
+    .featured-grid { grid-template-columns:1fr; }
+    .card-grid { grid-template-columns: repeat(2,1fr); }
+  }
+  @media(max-width:600px) { .card-grid { grid-template-columns:1fr; } }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius:6px; overflow:hidden;
+    transition: transform .2s, border-color .2s, box-shadow .2s;
+    cursor:pointer; position:relative;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 8px 30px rgba(0,229,255,.08);
+  }
+  .card-img {
+    width:100%; aspect-ratio:16/9;
+    object-fit:cover; display:block;
+    background: var(--bg3);
+    position:relative;
+  }
+  .card-img-placeholder {
+    width:100%; aspect-ratio:16/9;
+    display:flex; align-items:center; justify-content:center;
+    font-size:3rem;
+    background: linear-gradient(135deg, var(--bg3), var(--panel));
+  }
+  .card.featured .card-img-placeholder { aspect-ratio:21/9; font-size:5rem; }
+  .card-body { padding:18px; }
+  .card-tags { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px; }
+  .tag {
+    font-family:'Space Mono',monospace; font-size:.6rem;
+    padding:2px 8px; border-radius:2px; text-transform:uppercase; letter-spacing:.5px;
+    font-weight:700;
+  }
+  .tag-alert { background:rgba(255,61,90,.15); color:var(--accent2); border:1px solid rgba(255,61,90,.3); }
+  .tag-guide { background:rgba(127,255,110,.1); color:var(--accent3); border:1px solid rgba(127,255,110,.3); }
+  .tag-news  { background:rgba(0,229,255,.1); color:var(--accent); border:1px solid rgba(0,229,255,.3); }
+  .tag-live  { background:rgba(255,209,102,.1); color:var(--gold); border:1px solid rgba(255,209,102,.3); animation:pulse-tag 1.5s ease-in-out infinite; }
+  @keyframes pulse-tag { 0%,100%{opacity:1} 50%{opacity:.5} }
+  .card h3 {
+    font-family:'Rajdhani',sans-serif; font-size:1.1rem; font-weight:700;
+    color:var(--text-bright); margin-bottom:8px; line-height:1.3;
+  }
+  .card.featured h3 { font-size:1.5rem; }
+  .card p { color:var(--text-dim); font-size:.87rem; line-height:1.6; }
+  .card-meta {
+    display:flex; align-items:center; gap:12px;
+    margin-top:14px; padding-top:12px;
+    border-top:1px solid var(--border);
+    font-family:'Space Mono',monospace; font-size:.65rem; color:var(--text-dim);
+  }
+  .card-meta span { display:flex; align-items:center; gap:4px; }
+  .card-badge {
+    position:absolute; top:10px; right:10px;
+    background:var(--accent2); color:#fff;
+    font-family:'Space Mono',monospace; font-size:.6rem;
+    padding:3px 8px; font-weight:700; text-transform:uppercase;
+    border-radius:2px;
+  }
+  .card-source-badge {
+    position:absolute; top:10px; left:10px;
+    background:rgba(5,12,20,.85); color:var(--gold);
+    font-family:'Space Mono',monospace; font-size:.6rem;
+    padding:3px 8px; font-weight:700; text-transform:uppercase;
+    border-radius:2px; border:1px solid var(--gold);
+  }
+
+  /* LIVE NEWS SECTION */
+  .live-section { padding: 50px 0; border-top:1px solid var(--border); }
+  .live-grid { display:grid; grid-template-columns: repeat(3,1fr); gap:16px; }
+  @media(max-width:700px) { .live-grid { grid-template-columns:1fr; } }
+  .live-card {
+    background:var(--card-bg); border:1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    padding:18px; border-radius:4px;
+    transition: border-color .2s, transform .2s;
+    cursor:pointer;
+  }
+  .live-card:hover { border-left-color:var(--accent); transform:translateX(4px); }
+  .live-card-source {
+    font-family:'Space Mono',monospace; font-size:.6rem;
+    color:var(--gold); text-transform:uppercase; letter-spacing:1px;
+    margin-bottom:8px; display:flex; align-items:center; gap:6px;
+  }
+  .live-card-source::before {
+    content:''; width:6px; height:6px;
+    background:var(--gold); border-radius:50%;
+    animation:pulse-tag 1.5s ease-in-out infinite;
+  }
+  .live-card h4 {
+    font-family:'Rajdhani',sans-serif; font-size:1rem; font-weight:700;
+    color:var(--text-bright); margin-bottom:6px; line-height:1.3;
+  }
+  .live-card p { color:var(--text-dim); font-size:.82rem; line-height:1.5; }
+  .live-card-time {
+    margin-top:10px;
+    font-family:'Space Mono',monospace; font-size:.6rem; color:var(--text-dim);
+  }
+  .live-loading {
+    grid-column:1/-1; text-align:center; padding:50px 20px;
+    font-family:'Space Mono',monospace; font-size:.8rem; color:var(--text-dim);
+  }
+  .spinner {
+    display:inline-block; width:18px; height:18px;
+    border: 2px solid var(--border); border-top-color: var(--accent);
+    border-radius:50%; animation:spin .7s linear infinite;
+    vertical-align:middle; margin-right:8px;
+  }
+  @keyframes spin { to{transform:rotate(360deg)} }
+  .live-error {
+    grid-column:1/-1; text-align:center; padding:30px;
+    color:var(--accent2); font-family:'Space Mono',monospace; font-size:.8rem;
+  }
+
+  /* ADMIN MODAL */
+  .overlay {
+    position:fixed; inset:0; background:rgba(0,0,0,.8);
+    z-index:1000; display:none; align-items:center; justify-content:center;
+    backdrop-filter: blur(6px);
+    padding:20px;
+  }
+  .overlay.open { display:flex; }
+  .admin-panel {
+    background:var(--bg2); border:1px solid var(--accent);
+    border-radius:8px; width:100%; max-width:700px;
+    max-height:90vh; overflow-y:auto;
+    box-shadow: 0 0 60px rgba(0,229,255,.1);
+    animation: slide-up .25s ease;
+  }
+  @keyframes slide-up { from{transform:translateY(20px);opacity:0} to{transform:translateY(0);opacity:1} }
+  .admin-header {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 24px; border-bottom:1px solid var(--border);
+    position:sticky; top:0; background:var(--bg2); z-index:1;
+  }
+  .admin-header h2 {
+    font-family:'Rajdhani',sans-serif; font-size:1.2rem; font-weight:700;
+    color:var(--accent); text-transform:uppercase; letter-spacing:2px;
+  }
+  .close-btn {
+    background:none; border:1px solid var(--border);
+    color:var(--text-dim); width:30px; height:30px;
+    border-radius:4px; cursor:pointer; font-size:1.1rem;
+    display:grid; place-items:center;
+    transition: border-color .2s, color .2s;
+  }
+  .close-btn:hover { border-color:var(--accent2); color:var(--accent2); }
+  .admin-body { padding:24px; }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .form-group { margin-bottom:16px; }
+  .form-group label {
+    display:block; margin-bottom:6px;
+    font-family:'Space Mono',monospace; font-size:.65rem;
+    color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;
+  }
+  .form-group input, .form-group textarea, .form-group select {
+    width:100%; background:var(--bg3); border:1px solid var(--border);
+    color:var(--text-bright); padding:10px 14px;
+    border-radius:4px; font-family:'Exo 2',sans-serif; font-size:.9rem;
+    outline:none; transition: border-color .2s;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+    border-color:var(--accent);
+  }
+  .form-group textarea { resize:vertical; min-height:100px; }
+  .form-group select option { background:var(--bg3); }
+  .submit-btn {
+    width:100%; padding:12px;
+    background: linear-gradient(90deg, var(--accent), #0097b2);
+    color:#000; font-family:'Rajdhani',sans-serif;
+    font-size:1rem; font-weight:700; letter-spacing:2px;
+    text-transform:uppercase; border:none; border-radius:4px;
+    cursor:pointer; transition: opacity .2s;
+  }
+  .submit-btn:hover { opacity:.85; }
+  .toast {
+    position:fixed; bottom:24px; right:24px;
+    background: var(--accent3); color:#000;
+    font-family:'Rajdhani',sans-serif; font-weight:700;
+    font-size:.9rem; padding:12px 22px; border-radius:4px;
+    z-index:2000; transform:translateY(60px); opacity:0;
+    transition: all .3s; pointer-events:none;
+  }
+  .toast.show { transform:translateY(0); opacity:1; }
+
+  /* POST LIST in admin */
+  .post-list { margin-top:24px; }
+  .post-list-title {
+    font-family:'Space Mono',monospace; font-size:.65rem;
+    color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;
+    margin-bottom:12px;
+  }
+  .post-item {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:10px 14px; background:var(--bg3);
+    border:1px solid var(--border); border-radius:4px; margin-bottom:8px;
+    gap:10px;
+  }
+  .post-item-title {
+    font-family:'Rajdhani',sans-serif; font-size:.95rem; font-weight:600;
+    color:var(--text-bright); flex:1; overflow:hidden;
+    text-overflow:ellipsis; white-space:nowrap;
+  }
+  .post-item-tag {
+    font-family:'Space Mono',monospace; font-size:.58rem;
+    padding:2px 6px; border-radius:2px; white-space:nowrap;
+  }
+  .del-btn {
+    background:none; border:1px solid var(--accent2);
+    color:var(--accent2); padding:4px 10px; border-radius:3px;
+    cursor:pointer; font-family:'Space Mono',monospace; font-size:.6rem;
+    transition: background .2s, color .2s; white-space:nowrap;
+  }
+  .del-btn:hover { background:var(--accent2); color:#fff; }
+
+  /* SEARCH & FILTER */
+  .search-bar {
+    display:flex; gap:12px; margin-bottom:30px; flex-wrap:wrap;
+  }
+  .search-bar input {
+    flex:1; min-width:200px;
+    background:var(--card-bg); border:1px solid var(--border);
+    color:var(--text-bright); padding:10px 16px;
+    border-radius:4px; font-family:'Exo 2',sans-serif; font-size:.9rem;
+    outline:none; transition: border-color .2s;
+  }
+  .search-bar input:focus { border-color:var(--accent); }
+  .filter-btn {
+    background:transparent; border:1px solid var(--border);
+    color:var(--text-dim); padding:8px 16px; border-radius:4px;
+    cursor:pointer; font-family:'Rajdhani',sans-serif;
+    font-size:.82rem; font-weight:600; letter-spacing:.5px;
+    transition: all .2s;
+  }
+  .filter-btn:hover, .filter-btn.active { background:var(--accent); color:#000; border-color:var(--accent); }
+
+  /* HELPLINE BANNER */
+  .helpline-banner {
+    background: linear-gradient(90deg, rgba(255,61,90,.1), rgba(255,61,90,.05));
+    border: 1px solid rgba(255,61,90,.3);
+    border-left: 4px solid var(--accent2);
+    padding: 16px 24px; border-radius:4px; margin: 40px 0;
+    display:flex; align-items:center; justify-content:space-between;
+    flex-wrap:wrap; gap:12px;
+  }
+  .helpline-banner .hl-text {
+    font-family:'Rajdhani',sans-serif; font-size:1rem; font-weight:600;
+    color:var(--text-bright);
+  }
+  .helpline-banner .hl-num {
+    font-family:'Space Mono',monospace; font-size:1.5rem; font-weight:700;
+    color:var(--accent2);
+  }
+  .helpline-banner .hl-note {
+    font-size:.8rem; color:var(--text-dim); margin-top:2px;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top:1px solid var(--border); padding:30px 0;
+    text-align:center; color:var(--text-dim);
+    font-family:'Space Mono',monospace; font-size:.7rem;
+    letter-spacing:.5px; position:relative; z-index:1;
+    margin-top:60px;
+  }
+  footer a { color:var(--accent); text-decoration:none; }
+
+  /* EMPTY STATE */
+  .empty-state {
+    text-align:center; padding:60px 20px; color:var(--text-dim);
+    font-family:'Space Mono',monospace; font-size:.8rem;
+  }
+  .empty-state .es-icon { font-size:3rem; margin-bottom:12px; }
+  /* LOGIN MODAL */
+  .login-overlay {
+    position:fixed; inset:0; background:rgba(0,0,0,.92);
+    z-index:2000; display:flex; align-items:center; justify-content:center;
+    backdrop-filter:blur(10px); padding:20px;
+  }
+  .login-box {
+    background:var(--bg2); border:1px solid var(--accent);
+    border-radius:10px; width:100%; max-width:380px;
+    padding:36px 32px; text-align:center;
+    box-shadow: 0 0 60px rgba(0,229,255,.12);
+    animation: slide-up .25s ease;
+  }
+  .login-box.shake {
+    animation: shake .4s ease;
+  }
+  @keyframes shake {
+    0%,100%{transform:translateX(0)}
+    20%{transform:translateX(-8px)}
+    40%{transform:translateX(8px)}
+    60%{transform:translateX(-5px)}
+    80%{transform:translateX(5px)}
+  }
+  .login-shield { font-size:2.8rem; margin-bottom:10px; }
+  .login-header h2 {
+    font-family:'Rajdhani',sans-serif; font-size:1.4rem; font-weight:700;
+    color:var(--accent); text-transform:uppercase; letter-spacing:2px;
+  }
+  .login-header p { color:var(--text-dim); font-size:.82rem; margin-top:4px; margin-bottom:20px; }
+  .login-field {
+    position:relative; margin-bottom:10px;
+  }
+  .login-field input {
+    width:100%; background:var(--bg3); border:1px solid var(--border);
+    color:var(--text-bright); padding:12px 44px 12px 16px;
+    border-radius:5px; font-family:'Exo 2',sans-serif; font-size:.95rem;
+    outline:none; transition:border-color .2s; text-align:left;
+  }
+  .login-field input:focus { border-color:var(--accent); }
+  .login-field input:disabled { opacity:.4; cursor:not-allowed; }
+  .login-eye {
+    position:absolute; right:10px; top:50%; transform:translateY(-50%);
+    background:none; border:none; cursor:pointer; font-size:1rem; opacity:.5;
+    transition:opacity .2s;
+  }
+  .login-eye:hover { opacity:1; }
+  .login-error {
+    background:rgba(255,61,90,.1); border:1px solid rgba(255,61,90,.3);
+    color:var(--accent2); font-family:'Space Mono',monospace; font-size:.7rem;
+    padding:8px 12px; border-radius:4px; margin-bottom:12px;
+    display:none; text-align:left;
+  }
+  .login-error.show { display:block; }
+  .attempts-bar {
+    font-family:'Space Mono',monospace; font-size:.65rem;
+    margin-bottom:10px; text-align:left; padding:0 2px;
+  }
+  .login-submit {
+    width:100%; padding:12px;
+    background:linear-gradient(90deg,var(--accent),#0097b2);
+    color:#000; font-family:'Rajdhani',sans-serif;
+    font-size:1rem; font-weight:700; letter-spacing:2px;
+    text-transform:uppercase; border:none; border-radius:5px;
+    cursor:pointer; margin-top:6px; transition:opacity .2s;
+  }
+  .login-submit:hover { opacity:.85; }
+  .login-submit:disabled { opacity:.35; cursor:not-allowed; }
+  .login-cancel {
+    width:100%; padding:10px; margin-top:10px;
+    background:transparent; border:1px solid var(--border);
+    color:var(--text-dim); font-family:'Rajdhani',sans-serif;
+    font-size:.9rem; font-weight:600; letter-spacing:1px;
+    text-transform:uppercase; border-radius:5px; cursor:pointer;
+    transition:border-color .2s, color .2s;
+  }
+  .login-cancel:hover { border-color:var(--accent2); color:var(--accent2); }
+  .login-hint {
+    margin-top:16px; font-family:'Space Mono',monospace; font-size:.6rem;
+    color:var(--text-dim); opacity:.5;
+  }
+  /* LOGOUT BTN */
+  .logout-btn {
+    background:none; border:1px solid rgba(255,61,90,.4);
+    color:var(--accent2); padding:4px 12px; border-radius:3px;
+    cursor:pointer; font-family:'Space Mono',monospace; font-size:.6rem;
+    letter-spacing:.5px; margin-left:8px;
+    transition:background .2s, color .2s;
+  }
+  .logout-btn:hover { background:var(--accent2); color:#fff; }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <div class="topbar-inner">
+    <div class="logo">
+      <div class="logo-icon">CS</div>
+      CyberSafe India
+    </div>
+    <div class="nav-links">
+      <a href="#blog">Blog</a>
+      <a href="#live-news">Live News</a>
+      <a href="#helpline">Helpline</a>
+    </div>
+    <!-- admin access hidden -->
+  </div>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner" id="ticker">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">🛡 India's #1 Cyber Crime Awareness Platform</div>
+  <h1>Cyber<span>Safe</span> India</h1>
+  <p>Real-time alerts, expert guides, and live updates on cyber threats targeting India. Stay one step ahead of digital criminals.</p>
+  <div class="hero-stats" id="stats-row">
+    <!-- filled by JS -->
+  </div>
+</section>
+
+<!-- BLOG SECTION -->
+<section class="blog-section" id="blog">
+  <div class="container">
+    <div class="section-header">
+      <h2>Latest Posts</h2>
+      <div class="sh-line"></div>
+      <span class="sh-badge" id="post-count">0 Posts</span>
+    </div>
+    <!-- Search & Filter -->
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="🔍  Search posts…" oninput="renderBlog()">
+      <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+      <button class="filter-btn" onclick="setFilter('alert',this)">🚨 Alerts</button>
+      <button class="filter-btn" onclick="setFilter('guide',this)">📖 Guides</button>
+      <button class="filter-btn" onclick="setFilter('news',this)">📰 News</button>
+    </div>
+    <!-- Blog output -->
+    <div id="blog-output"></div>
+
+    <!-- Helpline -->
+    <div class="helpline-banner" id="helpline">
+      <div>
+        <div class="hl-text">🚨 Cyber Crime Helpline — Report within the Golden Hour</div>
+        <div class="hl-note">Available 24×7 · Report fraud, phishing, and scams</div>
+      </div>
+      <div class="hl-num">📞 1930</div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE NEWS SECTION -->
+<section class="live-section" id="live-news">
+  <div class="container">
+    <div class="section-header">
+      <h2>Live Cyber News</h2>
+      <div class="sh-line"></div>
+      <span class="sh-badge" style="background:var(--gold);color:#000;animation:pulse-tag 1.5s ease-in-out infinite">● LIVE</span>
+    </div>
+    <div class="live-grid" id="live-grid">
+      <div class="live-loading"><span class="spinner"></span> Fetching latest cyber news…</div>
+    </div>
+    <div style="text-align:center;margin-top:20px">
+      <button class="filter-btn" onclick="fetchLiveNews()" style="padding:10px 24px;">↻ Refresh News</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>© 2026 CyberSafe India · Built for awareness · <a href="https://cybercrime.gov.in" target="_blank">cybercrime.gov.in</a></div>
+  <div style="margin-top:6px;color:var(--accent)">National Cyber Crime Helpline: 1930</div>
+</footer>
+
+<!-- ADMIN PANEL MODAL -->
+<div class="overlay" id="admin-overlay">
+  <div class="admin-panel">
+    <div class="admin-header">
+      <h2>⚙ Admin — Manage Posts</h2>
+      <button class="close-btn" onclick="closeAdmin()">✕</button>
+    </div>
+    <div class="admin-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Post Title *</label>
+          <input type="text" id="f-title" placeholder="e.g. New UPI Scam Alert">
+        </div>
+        <div class="form-group">
+          <label>Category *</label>
+          <select id="f-cat">
+            <option value="alert">🚨 Alert</option>
+            <option value="guide">📖 Guide</option>
+            <option value="news">📰 News</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Summary (short description) *</label>
+        <input type="text" id="f-summary" placeholder="Brief one-line description">
+      </div>
+      <div class="form-group">
+        <label>Full Content *</label>
+        <textarea id="f-content" placeholder="Detailed post content…"></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Author</label>
+          <input type="text" id="f-author" placeholder="e.g. CyberSafe Team" value="CyberSafe Team">
+        </div>
+        <div class="form-group">
+          <label>Emoji Icon</label>
+          <input type="text" id="f-emoji" placeholder="e.g. 🛡 or 🚨" value="🛡">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Featured Post?</label>
+        <select id="f-featured">
+          <option value="false">No</option>
+          <option value="true">Yes — show as hero card</option>
+        </select>
+      </div>
+      <button class="submit-btn" onclick="addPost()">+ Publish Post</button>
+
+      <!-- Post list -->
+      <div class="post-list">
+        <div class="post-list-title">Existing Posts</div>
+        <div id="admin-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ─── DATA STORE ───────────────────────────────────────────────────────────────
+const STORAGE_KEY = 'cybersafe_posts_v1';
+
+const DEFAULT_POSTS = [
+  {
+    id: 'p1',
+    title: 'Massive UPI AutoPay Scam Drains Accounts Across India',
+    category: 'alert',
+    summary: 'Victims unknowingly authorize recurring payments disguised as OTT or utility services.',
+    content: 'A new wave of UPI AutoPay fraud is targeting users through fake subscription approvals. Scammers create counterfeit links mimicking OTT platforms and utility providers. Once approved, silent deductions occur over weeks before victims notice. Always verify mandate sources in your BHIM/UPI app settings and revoke unknown mandates immediately. Report to 1930 within the golden hour.',
+    author: 'CyberSafe Team',
+    emoji: '💸',
+    featured: true,
+    date: '2026-04-10'
+  },
+  {
+    id: 'p2',
+    title: 'Deepfake Video Calls Used in Corporate Fraud',
+    category: 'news',
+    summary: 'AI-generated video calls mimic CFOs and CEOs to authorize fraudulent fund transfers.',
+    content: 'Several Indian corporations have reported losses after attackers used AI deepfake technology to impersonate senior executives on video calls. Employees were tricked into transferring funds to fraudulent accounts. Experts recommend verbal code-word verification for all financial transactions, regardless of video confirmation.',
+    author: 'Tech Desk',
+    emoji: '🤖',
+    featured: false,
+    date: '2026-04-09'
+  },
+  {
+    id: 'p3',
+    title: 'Fake Police Arrest Scam Spreading via WhatsApp',
+    category: 'alert',
+    summary: 'Scammers pose as officers threatening immediate arrest to extort payments.',
+    content: 'A new variant of the "Digital Arrest" scam has emerged across major Indian cities. Fraudsters call victims claiming to be CBI or local police officers, threatening arrest over fabricated cases. They demand urgent payment to "settle" the matter. Remember: No real officer will demand payment over a phone or video call. Hang up and call 1930 immediately.',
+    author: 'CyberSafe Team',
+    emoji: '👮',
+    featured: false,
+    date: '2026-04-08'
+  },
+  {
+    id: 'p4',
+    title: 'How to Disable UPI AutoPay Mandates',
+    category: 'guide',
+    summary: 'Step-by-step guide to check and revoke unknown UPI mandates in minutes.',
+    content: 'Open your UPI app (Google Pay, PhonePe, or BHIM). Navigate to Settings → Manage Mandates or AutoPay. Review all active mandates. Pause or delete any you do not recognize. Check your bank statement for recurring small deductions. Enable transaction alerts for all amounts.',
+    author: 'Security Desk',
+    emoji: '🔒',
+    featured: false,
+    date: '2026-04-07'
+  },
+  {
+    id: 'p5',
+    title: 'Telegram Job Scam Rings Target Indian Youth',
+    category: 'alert',
+    summary: 'Part-time job offers that trap users in deposit-based task scams.',
+    content: 'Fraudsters on Telegram promise easy part-time income through "task-based" work like watching videos or rating products. Victims initially receive small payouts to build trust, then are asked to deposit money to "unlock" higher-paying tasks. Once deposited, the scammers vanish. Never pay money to get paid — this is the defining feature of all such scams.',
+    author: 'CyberSafe Team',
+    emoji: '📲',
+    featured: false,
+    date: '2026-04-06'
+  },
+  {
+    id: 'p6',
+    title: 'AI Voice Cloning Used to Defraud Families',
+    category: 'news',
+    summary: 'Scammers clone relatives\' voices using AI to demand emergency money.',
+    content: 'Indian families across Bengaluru and Delhi have reported receiving distress calls where the caller\'s voice sounded exactly like their child or relative. The cloned voice begged for immediate financial help. AI tools can now clone a voice from just a few seconds of audio found on social media. Establish a family verification code word for emergencies.',
+    author: 'Investigations',
+    emoji: '🗣️',
+    featured: false,
+    date: '2026-04-05'
+  }
+];
+
+const TICKER_ITEMS = [
+  '🚨 UPI AutoPay fraud rising — check your mandates',
+  '⚠️ Deepfake video scams spreading in corporates',
+  '🚔 Fake police arrest calls reported nationwide',
+  '💼 Telegram job scams targeting Indian youth',
+  '🔐 Never approve unknown UPI mandates',
+  '📞 Call 1930 within the golden hour of cyber fraud',
+  '🖥️ Screen sharing scams increasing on mobile',
+  '🤖 AI voice cloning fraud cases rising in India',
+  '🛡️ Enable 2FA on all banking apps immediately',
+  '💳 Never share OTP — banks never ask for it',
+];
+
+const HERO_STATS = [
+  { val: '₹11,333 Cr', label: 'Losses in 2025', cls: 'red' },
+  { val: '1.7M+', label: 'Complaints (2025)', cls: '' },
+  { val: '1930', label: 'Helpline 24×7', cls: 'green' },
+  { val: '8 Hrs', label: 'Avg. Resolution', cls: '' },
+];
+
+// ─── STATE ─────────────────────────────────────────────────────────────────────
+let posts = [];
+let activeFilter = 'all';
+
+function loadPosts() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      posts = JSON.parse(saved);
+    } else {
+      posts = [...DEFAULT_POSTS];
+      savePosts();
+    }
+  } catch(e) {
+    posts = [...DEFAULT_POSTS];
+  }
+}
+
+function savePosts() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(posts)); } catch(e) {}
+}
+
+// ─── TICKER ────────────────────────────────────────────────────────────────────
+function buildTicker() {
+  const doubled = [...TICKER_ITEMS, ...TICKER_ITEMS];
+  document.getElementById('ticker').innerHTML = doubled
+    .map(t => `<span class="ticker-item"><span class="ticker-dot"></span>${t}</span>`)
+    .join('');
+}
+
+// ─── HERO STATS ────────────────────────────────────────────────────────────────
+function buildStats() {
+  document.getElementById('stats-row').innerHTML = HERO_STATS
+    .map(s => `<div class="stat-box">
+      <div class="stat-val ${s.cls}">${s.val}</div>
+      <div class="stat-label">${s.label}</div>
+    </div>`).join('');
+}
+
+// ─── FILTER ────────────────────────────────────────────────────────────────────
+function setFilter(f, btn) {
+  activeFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderBlog();
+}
+
+// ─── BLOG RENDER ───────────────────────────────────────────────────────────────
+function renderBlog() {
+  const q = (document.getElementById('search-input').value || '').toLowerCase();
+  let filtered = posts.filter(p => {
+    const matchFilter = activeFilter === 'all' || p.category === activeFilter;
+    const matchSearch = !q || p.title.toLowerCase().includes(q) || p.summary.toLowerCase().includes(q);
+    return matchFilter && matchSearch;
+  });
+
+  document.getElementById('post-count').textContent = `${filtered.length} Post${filtered.length !== 1 ? 's' : ''}`;
+
+  const out = document.getElementById('blog-output');
+  if (!filtered.length) {
+    out.innerHTML = `<div class="empty-state"><div class="es-icon">🔍</div>No posts match your search or filter.</div>`;
+    return;
+  }
+
+  const featured = filtered.filter(p => p.featured);
+  const regular = filtered.filter(p => !p.featured);
+
+  let html = '';
+
+  if (featured.length) {
+    html += `<div class="featured-grid">`;
+    featured.slice(0,1).forEach(p => { html += buildCard(p, true); });
+    if (regular.length) html += buildCard(regular[0], false);
+    html += `</div>`;
+    const rest = regular.slice(1);
+    if (rest.length) {
+      html += `<div class="card-grid">`;
+      rest.forEach(p => { html += buildCard(p, false); });
+      html += `</div>`;
+    }
+  } else {
+    html += `<div class="card-grid">`;
+    filtered.forEach(p => { html += buildCard(p, false); });
+    html += `</div>`;
+  }
+
+  out.innerHTML = html;
+}
+
+function buildCard(p, featured) {
+  const tagMap = {
+    alert: '<span class="tag tag-alert">🚨 Alert</span>',
+    guide: '<span class="tag tag-guide">📖 Guide</span>',
+    news:  '<span class="tag tag-news">📰 News</span>',
+  };
+  const fDate = formatDate(p.date);
+  return `
+    <div class="card${featured ? ' featured' : ''}">
+      ${featured ? '<span class="card-badge">FEATURED</span>' : ''}
+      <div class="card-img-placeholder">${p.emoji || '🛡'}</div>
+      <div class="card-body">
+        <div class="card-tags">${tagMap[p.category] || ''}</div>
+        <h3>${escHtml(p.title)}</h3>
+        <p>${escHtml(p.summary)}</p>
+        <div class="card-meta">
+          <span>✍ ${escHtml(p.author)}</span>
+          <span>📅 ${fDate}</span>
+        </div>
+      </div>
+    </div>`;
+}
+
+function formatDate(d) {
+  if (!d) return 'Recently';
+  try {
+    return new Date(d).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+  } catch(e) { return d; }
+}
+
+function escHtml(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ─── ADMIN SECURITY ───────────────────────────────────────────────────────────
+// SHA-256 hash of the admin password. Default password: CyberSafe@2026
+// To change: replace this hash with SHA-256 of your new password.
+const ADMIN_PASS_HASH = '2d069c8912dfee4a7b767061dcebe004ca66bbfa94026c0eb7b0f10d2f07f225';
+
+// Security config
+const MAX_ATTEMPTS = 5;
+const LOCKOUT_MS   = 15 * 60 * 1000; // 15 minutes
+const SESSION_MS   = 30 * 60 * 1000; // 30-minute session timeout
+const SEC_KEY      = 'csi_admin_sec';
+
+let sessionTimer = null;
+
+async function sha256(msg) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+function getSecState() {
+  try { return JSON.parse(sessionStorage.getItem(SEC_KEY)) || {}; } catch { return {}; }
+}
+function setSecState(s) { sessionStorage.setItem(SEC_KEY, JSON.stringify(s)); }
+
+function isLockedOut() {
+  const s = getSecState();
+  if (s.lockUntil && Date.now() < s.lockUntil) return s.lockUntil;
+  return false;
+}
+
+function isAuthenticated() {
+  const s = getSecState();
+  return s.auth && s.authExpiry && Date.now() < s.authExpiry;
+}
+
+function startSessionTimer() {
+  clearTimeout(sessionTimer);
+  sessionTimer = setTimeout(() => {
+    const s = getSecState();
+    delete s.auth; delete s.authExpiry;
+    setSecState(s);
+    if (document.getElementById('admin-overlay').classList.contains('open')) {
+      closeAdminPanel();
+      showToast('⏱ Session expired. Please log in again.', '#ff3d5a');
+    }
+  }, SESSION_MS);
+}
+
+function openAdmin() {
+  if (isAuthenticated()) {
+    startSessionTimer();
+    document.getElementById('admin-overlay').classList.add('open');
+    renderAdminList();
+  } else {
+    showLoginModal();
+  }
+}
+
+function closeAdmin() {
+  document.getElementById('admin-overlay').classList.remove('open');
+}
+
+function closeAdminPanel() {
+  document.getElementById('admin-overlay').classList.remove('open');
+}
+
+function logout() {
+  const s = getSecState();
+  delete s.auth; delete s.authExpiry;
+  setSecState(s);
+  clearTimeout(sessionTimer);
+  closeAdmin();
+  showToast('🔒 Logged out successfully.');
+}
+
+// ─── LOGIN MODAL ──────────────────────────────────────────────────────────────
+function showLoginModal() {
+  const lockUntil = isLockedOut();
+  const s = getSecState();
+  const remaining = lockUntil ? Math.ceil((lockUntil - Date.now()) / 60000) : 0;
+
+  let lockMsg = '';
+  if (lockUntil) {
+    lockMsg = `<div class="login-error show">🔒 Too many attempts. Locked for ${remaining} more minute${remaining !== 1 ? 's' : ''}.</div>`;
+  }
+
+  document.body.insertAdjacentHTML('beforeend', `
+    <div class="login-overlay" id="login-overlay">
+      <div class="login-box">
+        <div class="login-header">
+          <div class="login-shield">🔐</div>
+          <h2>Admin Access</h2>
+          <p>Enter password to continue</p>
+        </div>
+        ${lockMsg}
+        <div id="login-err-msg" class="login-error"></div>
+        <div class="login-field">
+          <input type="password" id="login-pass" placeholder="Password"
+            onkeydown="if(event.key==='Enter')attemptLogin()"
+            ${lockUntil ? 'disabled' : ''} autocomplete="current-password">
+          <button class="login-eye" onclick="togglePassVis()" title="Show/hide">👁</button>
+        </div>
+        <div id="attempts-bar" class="attempts-bar" style="display:${s.attempts ? 'block' : 'none'}">
+          ${s.attempts ? `<span style="color:var(--accent2)">⚠ ${MAX_ATTEMPTS - (s.attempts||0)} attempt${MAX_ATTEMPTS-(s.attempts||0)!==1?'s':''} remaining</span>` : ''}
+        </div>
+        <button class="login-submit" onclick="attemptLogin()" ${lockUntil ? 'disabled' : ''}>
+          Unlock Panel
+        </button>
+        <button class="login-cancel" onclick="dismissLogin()">Cancel</button>
+        <div class="login-hint">Hint: Change hash in source to set your password.</div>
+      </div>
+    </div>`);
+
+  setTimeout(() => document.getElementById('login-pass')?.focus(), 100);
+}
+
+function togglePassVis() {
+  const inp = document.getElementById('login-pass');
+  if (inp) inp.type = inp.type === 'password' ? 'text' : 'password';
+}
+
+async function attemptLogin() {
+  if (isLockedOut()) return;
+  const pass = document.getElementById('login-pass')?.value || '';
+  const errEl = document.getElementById('login-err-msg');
+
+  if (!pass) {
+    errEl.textContent = '⚠ Please enter a password.';
+    errEl.classList.add('show'); return;
+  }
+
+  // Rate-limit delay (increases with attempts)
+  const s = getSecState();
+  const attempts = s.attempts || 0;
+  if (attempts > 0) await new Promise(r => setTimeout(r, Math.min(attempts * 800, 4000)));
+
+  const hash = await sha256(pass);
+
+  if (hash === ADMIN_PASS_HASH) {
+    // Success
+    setSecState({ auth: true, authExpiry: Date.now() + SESSION_MS, attempts: 0 });
+    dismissLogin();
+    startSessionTimer();
+    document.getElementById('admin-overlay').classList.add('open');
+    renderAdminList();
+    showToast('✓ Welcome, Admin! Session active for 30 min.');
+  } else {
+    // Failure
+    const newAttempts = attempts + 1;
+    let lockUntil = null;
+    if (newAttempts >= MAX_ATTEMPTS) {
+      lockUntil = Date.now() + LOCKOUT_MS;
+      setSecState({ attempts: newAttempts, lockUntil });
+      errEl.textContent = `🔒 Too many failed attempts. Locked for 15 minutes.`;
+      document.getElementById('login-pass').disabled = true;
+      document.querySelector('.login-submit').disabled = true;
+    } else {
+      setSecState({ attempts: newAttempts });
+      const left = MAX_ATTEMPTS - newAttempts;
+      errEl.textContent = `✗ Incorrect password. ${left} attempt${left!==1?'s':''} remaining.`;
+      const bar = document.getElementById('attempts-bar');
+      if (bar) { bar.style.display='block'; bar.innerHTML=`<span style="color:var(--accent2)">⚠ ${left} attempt${left!==1?'s':''} remaining</span>`; }
+    }
+    errEl.classList.add('show');
+    document.getElementById('login-pass').value = '';
+    document.getElementById('login-pass').focus();
+    // Shake animation
+    document.querySelector('.login-box').classList.add('shake');
+    setTimeout(() => document.querySelector('.login-box')?.classList.remove('shake'), 500);
+  }
+}
+
+function dismissLogin() {
+  document.getElementById('login-overlay')?.remove();
+}
+
+// Add logout button to admin header dynamically
+function renderAdminList() {
+  // Inject logout button if not present
+  const header = document.querySelector('.admin-header');
+  if (header && !header.querySelector('.logout-btn')) {
+    const s = getSecState();
+    const expMins = s.authExpiry ? Math.ceil((s.authExpiry - Date.now()) / 60000) : 0;
+    header.insertAdjacentHTML('beforeend',
+      `<button class="logout-btn" onclick="logout()" title="End session">🔓 Logout</button>`);
+  }
+
+  const tagMap = { alert:'#ff3d5a', guide:'#7fff6e', news:'#00e5ff' };
+  const container = document.getElementById('admin-post-list');
+  if (!posts.length) {
+    container.innerHTML = '<div style="color:var(--text-dim);font-family:Space Mono,monospace;font-size:.75rem;text-align:center;padding:20px">No posts yet.</div>';
+    return;
+  }
+  container.innerHTML = posts.map(p => `
+    <div class="post-item">
+      <div class="post-item-title">${escHtml(p.title)}</div>
+      <span class="post-item-tag" style="background:${tagMap[p.category]}22;color:${tagMap[p.category]};border:1px solid ${tagMap[p.category]}44">${p.category}</span>
+      <button class="del-btn" onclick="deletePost('${p.id}')">✕ Del</button>
+    </div>`).join('');
+}
+
+function addPost() {
+  const title   = document.getElementById('f-title').value.trim();
+  const cat     = document.getElementById('f-cat').value;
+  const summary = document.getElementById('f-summary').value.trim();
+  const content = document.getElementById('f-content').value.trim();
+  const author  = document.getElementById('f-author').value.trim() || 'CyberSafe Team';
+  const emoji   = document.getElementById('f-emoji').value.trim() || '🛡';
+  const featured= document.getElementById('f-featured').value === 'true';
+
+  if (!title || !summary || !content) {
+    showToast('⚠ Please fill all required fields.', '#ff3d5a');
+    return;
+  }
+
+  const newPost = {
+    id: 'p' + Date.now(),
+    title, category: cat, summary, content,
+    author, emoji, featured,
+    date: new Date().toISOString().split('T')[0]
+  };
+
+  // If new post is featured, unfeature previous featured
+  if (featured) { posts.forEach(p => { p.featured = false; }); }
+
+  posts.unshift(newPost);
+  savePosts();
+  renderBlog();
+  renderAdminList();
+  showToast('✓ Post published successfully!');
+
+  // Clear form
+  ['f-title','f-summary','f-content'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('f-emoji').value = '🛡';
+  document.getElementById('f-featured').value = 'false';
+}
+
+function deletePost(id) {
+  if (!confirm('Delete this post?')) return;
+  posts = posts.filter(p => p.id !== id);
+  savePosts();
+  renderBlog();
+  renderAdminList();
+  showToast('Post deleted.', '#ff3d5a');
+}
+
+
+
+// ─── TOAST ────────────────────────────────────────────────────────────────────
+function showToast(msg, bg = '#7fff6e') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.background = bg;
+  t.style.color = bg === '#7fff6e' ? '#000' : '#fff';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ─── LIVE NEWS via Claude API ─────────────────────────────────────────────────
+async function fetchLiveNews() {
+  const grid = document.getElementById('live-grid');
+  grid.innerHTML = '<div class="live-loading"><span class="spinner"></span> Fetching latest cyber news from AI…</div>';
+
+  const prompt = `You are a cybersecurity news aggregator for India. Generate 6 realistic, current-style cybercrime/cybersecurity news headlines and summaries for India as of April 2026. Focus on: UPI fraud, deepfakes, phishing, ransomware, digital arrests, job scams, data breaches.
+
+Return ONLY valid JSON array, no markdown, no explanation:
+[
+  {
+    "title": "...",
+    "summary": "...",
+    "source": "Times of India",
+    "time": "2 hours ago",
+    "category": "alert"
+  }
+]
+Categories must be one of: alert, guide, news.
+Sources should vary: Times of India, NDTV, The Hindu, Economic Times, LiveMint, Indian Express, Hindustan Times.`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    const data = await res.json();
+    const text = data.content.map(c => c.text || '').join('');
+    const clean = text.replace(/```json|```/g, '').trim();
+    const articles = JSON.parse(clean);
+
+    renderLiveNews(articles);
+  } catch(err) {
+    grid.innerHTML = `<div class="live-error">⚠ Could not fetch live news. Check your connection or try again.<br><small style="opacity:.5;margin-top:6px;display:block">${err.message}</small></div>
+    <div style="grid-column:1/-1;text-align:center;margin-top:10px">
+      <button class="filter-btn" onclick="fetchLiveNews()">↻ Retry</button>
+    </div>`;
+  }
+}
+
+function renderLiveNews(articles) {
+  const grid = document.getElementById('live-grid');
+  const catColors = { alert: '#ff3d5a', news: '#00e5ff', guide: '#7fff6e' };
+  grid.innerHTML = articles.map(a => `
+    <div class="live-card">
+      <div class="live-card-source" style="color:${catColors[a.category]||'var(--gold)'}">
+        ${escHtml(a.source)} · ${escHtml(a.category.toUpperCase())}
+      </div>
+      <h4>${escHtml(a.title)}</h4>
+      <p>${escHtml(a.summary)}</p>
+      <div class="live-card-time">⏱ ${escHtml(a.time)}</div>
+    </div>`).join('');
+}
+
+// ─── SECRET ADMIN ACCESS ──────────────────────────────────────────────────────
+// Method 1: Press Ctrl + Shift + A
+document.addEventListener('keydown', function(e) {
+  if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+    e.preventDefault();
+    openAdmin();
+  }
+});
+
+// Method 2: Triple-click the logo
+let logoClicks = 0, logoTimer;
+document.querySelector('.logo').addEventListener('click', function() {
+  logoClicks++;
+  clearTimeout(logoTimer);
+  logoTimer = setTimeout(() => { logoClicks = 0; }, 800);
+  if (logoClicks >= 3) { logoClicks = 0; openAdmin(); }
+});
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+loadPosts();
+buildTicker();
+buildStats();
+renderBlog();
+fetchLiveNews();
+
+// Close overlay on outside click
+document.getElementById('admin-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeAdmin();
+});
+</script>
+</body>
+</html>
